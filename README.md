@@ -2,9 +2,9 @@
 Original Death Script by Vision for RDX-Framework
 
 ## Requirements
-- RDX-Core ()
-- RDX-Clothing ()
-- RDX-Skin ()
+- RDX-Core (https://github.com/Redm-Extended-PT/rdx_core)
+- RDX-Clothing (https://github.com/Redm-Extended-PT/rdx_clothing)
+- RDX-Skin (https://github.com/Redm-Extended-PT/rdx_skin)
 
 ## 1. Install
 - add to resources folder
