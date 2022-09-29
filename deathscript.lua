@@ -4,9 +4,6 @@ Citizen.CreateThread(function()	while RDX == nil do TriggerEvent('rdx:getSharedO
 StoreCoords  = 0
 local PlayerIsDead = false
 local Counter =  Death.Counter
-local SetHCore = Death.SHore
-local SetSCore = Death.SCore
-local SetDCore = Death.DCore
 
 Citizen.CreateThread(function() -- Stop Auto Respawn
 Citizen.Wait(1000)
