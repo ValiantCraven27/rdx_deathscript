@@ -6,6 +6,7 @@ Original Death Script by Vision for RDX-Framework
 - RDX-Core (https://github.com/Redm-Extended-PT/rdx_core)
 - RDX-Clothing (https://github.com/Redm-Extended-PT/rdx_clothing)
 - RDX-Skin (https://github.com/Redm-Extended-PT/rdx_skin)
+- InteractSound (https://github.com/ValiantCraven27/InteractSound)
 
 ## 1. Install
 - add to resources folder
