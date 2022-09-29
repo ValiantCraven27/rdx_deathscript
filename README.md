@@ -1,4 +1,5 @@
-# RDX-Core rdx_deathscript
+# RDX-Core
+# Native Nerdz rdx_deathscript
 Original Death Script by Vision for RDX-Framework
 
 ## Requirements
