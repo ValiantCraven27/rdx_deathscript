@@ -2,14 +2,13 @@
 Original Death Script by Vision for RDX-Framework
 
 ## Requirements
-RDX-Core ()
-RDX-Clothing ()
-RDX-Skin ()
+- RDX-Core ()
+- RDX-Clothing ()
+- RDX-Skin ()
 
 ## 1. Install
-add to resources folder
-add start rdx_deathscript to server.cfg
+- add to resources folder
+- add start rdx_deathscript to server.cfg
 
 ## 2. Restart Server and enjoy.
-
-TODO: Next update language support. Put out english first because we are in need of a Revive Script.
+- TODO: Next update language support. Put out english first because we are in need of a Revive Script.
