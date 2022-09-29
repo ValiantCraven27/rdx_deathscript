@@ -17,3 +17,5 @@ Original Death Script by Vision for RDX-Framework
 ## Commands
 - /revive
 - /die
+
+## TODO: Update language support and commands
