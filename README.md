@@ -1,5 +1,7 @@
 # RDX-Core
 # Native Nerdz rdx_deathscript
+
+## ATTENTION : Not doesn't work with rdx_ambulancejob
 Original Death Script by Vision for RDX-Framework
 
 ## Requirements
