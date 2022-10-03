@@ -8,7 +8,7 @@ end)
 StoreCoords  = RDX.GetPlayerData('lastPosition', {x = coords.x,y = coords.y,z = coords.z})
 local PlayerIsDead = false
 local Counter =  Death.Counter
-local SetHCore = Death.SHore
+local SetHCore = Death.HCore
 local SetSCore = Death.SCore
 local SetDCore = Death.DCore
 
