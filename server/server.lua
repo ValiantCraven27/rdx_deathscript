@@ -4,9 +4,7 @@ TriggerEvent('rdx:getSharedObject', function(obj) RDX = obj end)
 RDX.RegisterCommand('revive', 'admin', function(source, args)
 	if args[1] ~= nil then
 		if GetPlayerName(tonumber(args[1])) ~= nil then
-			TriggerClientEvent('rdx_revive:player', tonumber(args[1]))
-			
-			TriggerClientEvent('rdx_kill:player', tonumber(args[1]))
+			TriggerClientEvent('rdx_revive:player', tonumber(args[1]))			
 			TriggerClientEvent('chat:addMessage', -1, { args = { 'A admin has revived '..GetPlayerName(tonumber(args[1]))..'.' } })
 		end	
 	end

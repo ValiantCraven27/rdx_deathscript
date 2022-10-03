@@ -1,4 +1,4 @@
-RDX, Death, DSC = nil,{Counter = 30, HCore = 50, SCore = 50, DCore = 50, Weakness = true, Invincible = 5000},{} -- Settings
+RDX, Death, DSC = nil,{Counter = 30, HCore = 50, SCore = 50, DCore = 50, Weakness = false, Invincible = 5000},{} -- Settings
 Citizen.CreateThread(function() while RDX == nil do TriggerEvent('rdx:getSharedObject', function(obj) RDX = obj end) Citizen.Wait(0) end while RDX.GetPlayerData().job == nil do Citizen.Wait(100) end
 	RDX.PlayerData = RDX.GetPlayerData()
 end)
@@ -9,28 +9,29 @@ local Counter =  Death.Counter
 local SetHCore = Death.SHore
 local SetSCore = Death.SCore
 local SetDCore = Death.DCore
+local player
 
 Citizen.CreateThread(function() -- Stop Auto Respawn
 local coords	= GetEntityCoords(PlayerPedId())  
 Citizen.Wait(1000)
 exports.spawnmanager:setAutoSpawn(false)
-StoreCoords  = RDX.GetPlayerData('lastPosition', {x = coords.x,y = coords.y,z = coords.z})
+--StoreCoords  = RDX.GetPlayerData('lastPosition', {x = coords.x,y = coords.y,z = coords.z})
 end)
 
 Citizen.CreateThread(function() -- saveCoords
   while true do
     --Citizen.Wait(1)
-    local player = GetPlayerPed(-1)
+     player = GetPlayerPed(-1)
     if not IsPlayerDead(player) and not IsPedSwimming(player) and not IsEntityInWater(PlayerPedId())then
         StoreCoords  = GetEntityCoords(PlayerPedId())                                        
     end    
-    Citizen.Wait(10000)
+    Citizen.Wait(5000)
   end  
 end)
 
 Citizen.CreateThread(function() -- Death Listener
   while true do	
-    local player = GetPlayerPed(-1)
+      player = GetPlayerPed(-1)
     if IsPlayerDead(player) and GetEntityHealth(player) < 1 then       
         DSC:CallTimer(player)                                             
     end
@@ -41,7 +42,7 @@ end)
 Citizen.CreateThread(function() -- Death Listener
   while true do	
     Citizen.Wait(1)
-    local player = GetPlayerPed(-1)
+      player = GetPlayerPed(-1)
     if IsPlayerDead(player) and GetEntityHealth(player) < 1 then 
         DSC:DrawTxt(" Reviving in "..Counter.."",0.50, 0.95, 0.5, 0.5, true, 255, 255, 255, 255, true)                                                    
     end   
@@ -50,19 +51,20 @@ end)
  
 function DSC:Heartbeat(player) -- Timer  
   if IsPlayerDead(player) then  
-    TriggerEvent('rdx:playsound', "heartbeat", 0.5)   
-    Citizen.Wait(15000)
-    DSC:Heartbeat(player)
+      TriggerEvent('rdx:playsound', "heartbeat", 0.5)   
+      Citizen.Wait(15000)
+    if Counter > 13 and IsPlayerDead(player) then  
+        TriggerEvent('rdx:playsound', "heartbeat", 0.5)  
+    end
   end
 end
 
 function DSC:CallTimer(player) -- Timer
   Counter = Death.Counter 
   while Counter > 0 do    
-    local player = GetPlayerPed(-1)
     Citizen.Wait(1000)
     Counter = Counter - 1
-    if Counter < 1 and IsPlayerDead(player) then
+    if Counter < 1 then
        DSC:ReviveDeadPlayer(player)
     end
    end
@@ -75,21 +77,21 @@ end)
 
 RegisterNetEvent('rdx_revive:player') -- admin call
 AddEventHandler('rdx_revive:player', function()
-	local player = PlayerPedId()
-  DSC:ReviveDeadPlayer(player)   
+	local playerPed = PlayerPedId()
+  DSC:ReviveDeadPlayer(playerPed)   
 end)
 
 RegisterNetEvent('rdx_kill:player') -- admin call
 AddEventHandler('rdx_kill:player', function()
-	local player = PlayerPedId()
-	    if not IsPlayerDead(player) then
-      ApplyDamageToPed(player,500,0,0,0)
+	local playerPed = PlayerPedId()
+	    if not IsPlayerDead(playerPed) then
+      ApplyDamageToPed(playerPed,500,0,0,0)
       end	
 end)
 
 -- Revive
 function DSC:ReviveDeadPlayer(player)
-  if not IsPlayerDead(player) then
+  if IsPlayerDead(player) then
       DoScreenFadeOut(1000)             
       Citizen.Wait(2000)
       NetworkResurrectLocalPlayer(StoreCoords, 100.00, true, true, false )        
@@ -115,7 +117,7 @@ function DSC:DrawTxt(str, x, y, w, h, enableShadow, col1, col2, col3, a, centre)
 end
 
 RegisterCommand("die",function()
-    local player             = PlayerPedId()   
+    local player             = PlayerPedId()
     local playerCoords       = GetEntityCoords(player)
       if not IsPlayerDead(player) then
          ApplyDamageToPed(player,500,0,0,0)
