@@ -4,11 +4,9 @@ Citizen.CreateThread(function() while RDX == nil do TriggerEvent('rdx:getSharedO
 end)
 
 -- Weakness not implemented yet
-
-StoreCoords  = RDX.GetPlayerData('lastPosition', {x = coords.x,y = coords.y,z = coords.z})
-local PlayerIsDead = false
+local StoreCoords  = 0
 local Counter =  Death.Counter
-local SetHCore = Death.HCore
+local SetHCore = Death.SHore
 local SetSCore = Death.SCore
 local SetDCore = Death.DCore
 
@@ -50,49 +48,48 @@ Citizen.CreateThread(function() -- Death Listener
   end   
 end)
  
+function DSC:Heartbeat(player) -- Timer  
+  if IsPlayerDead(player) then  
+    TriggerEvent('rdx:playsound', "heartbeat", 0.5)   
+    Citizen.Wait(15000)
+    DSC:Heartbeat(player)
+  end
+end
+
 function DSC:CallTimer(player) -- Timer
-  Counter = Death.Counter
-  TriggerEvent('rdx:playsound', "heartbeat", 0.5) 
+  Counter = Death.Counter 
   while Counter > 0 do    
+    local player = GetPlayerPed(-1)
     Citizen.Wait(1000)
     Counter = Counter - 1
-    if Counter < 1 then
+    if Counter < 1 and IsPlayerDead(player) then
        DSC:ReviveDeadPlayer(player)
     end
    end
 end
 
-RegisterNetEvent('rdx_revive:player')
-AddEventHandler('rdx_revive:player', function()
-	local player = PlayerPedId()
-	local coords	= GetEntityCoords(playerPed)
-
-	Citizen.CreateThread(function()
-		DoScreenFadeOut(800)
-
-		while not IsScreenFadedOut() do
-			Citizen.Wait(0)
-		end
-
-    TriggerServerEvent('rdx:updateLastPosition', {
-			x = coords.x,
-			y = coords.y,
-			z = coords.z
-		})
-		DoScreenFadeIn(800)
-    DSC:ReviveDeadPlayer(player)
-	end)
-end)
-
 RegisterNetEvent('rdx:playsound') -- Play Sounds
 AddEventHandler('rdx:playsound', function(sound,volume)  
-    TriggerServerEvent('InteractSound_SV:PlayOnSource','whoareyou', 0.3) 
-    Citizen.Wait(2000)  
     TriggerServerEvent('InteractSound_SV:PlayOnSource',sound, volume) 
+end)
+
+RegisterNetEvent('rdx_revive:player') -- admin call
+AddEventHandler('rdx_revive:player', function()
+	local player = PlayerPedId()
+  DSC:ReviveDeadPlayer(player)   
+end)
+
+RegisterNetEvent('rdx_kill:player') -- admin call
+AddEventHandler('rdx_kill:player', function()
+	local player = PlayerPedId()
+	    if not IsPlayerDead(player) then
+      ApplyDamageToPed(player,500,0,0,0)
+      end	
 end)
 
 -- Revive
 function DSC:ReviveDeadPlayer(player)
+  if not IsPlayerDead(player) then
       DoScreenFadeOut(1000)             
       Citizen.Wait(2000)
       NetworkResurrectLocalPlayer(StoreCoords, 100.00, true, true, false )        
@@ -104,6 +101,7 @@ function DSC:ReviveDeadPlayer(player)
       Citizen.Wait(3000)  
       DoScreenFadeIn(3000)       
       NetworkSetLocalPlayerInvincibleTime(Death.Invincible) 
+  end    
 end
 
 function DSC:DrawTxt(str, x, y, w, h, enableShadow, col1, col2, col3, a, centre)
@@ -123,3 +121,5 @@ RegisterCommand("die",function()
          ApplyDamageToPed(player,500,0,0,0)
       end        
 end) 
+
+
