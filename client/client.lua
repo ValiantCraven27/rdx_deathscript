@@ -1,4 +1,4 @@
-RDX, Death, DSC = nil,{Counter = 15, HCore = 50, SCore = 50, DCore = 50, Weakness = true, Invincible = 5000},{} -- Settings
+RDX, Death, DSC = nil,{Counter = 30, HCore = 50, SCore = 50, DCore = 50, Weakness = true, Invincible = 5000},{} -- Settings
 Citizen.CreateThread(function() while RDX == nil do TriggerEvent('rdx:getSharedObject', function(obj) RDX = obj end) Citizen.Wait(0) end while RDX.GetPlayerData().job == nil do Citizen.Wait(100) end
 	RDX.PlayerData = RDX.GetPlayerData()
 end)
