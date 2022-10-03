@@ -18,7 +18,11 @@ Original Death Script by Vision for RDX-Framework
 - TODO: Next update language support. Put out english first because we are in need of a Revive Script.
 
 ## Commands
-- /revive
 - /die
+
+## Admin Commands
+- /revive #
+- /death # -- Warning system
+- /deathkick # -- kills then kicks player
 
 ## TODO: Update language support and commands
