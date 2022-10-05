@@ -29,14 +29,19 @@ RDX.RegisterCommand('deathkick', 'admin', function(source, args)
 				TriggerClientEvent('rdx_kill:player', tonumber(args[1]))
 				Citizen.Wait(5000)
 				DropPlayer((tonumber(args[1])), "has been kicked by an admin")
-				TriggerClientEvent('chat:addMessage', -1, { args = { ''..GetPlayerName(tonumber(args[1]))..' has been kicked by an admin' } })
+				TriggerClientEvent('chat:addMessage', -1, { args = { ''..PlayerPedId(GetPlayerName(tonumber(args[1])))..' has been kicked by an admin' } })
 			end	
 		end
 	
 	end, function(source, args)
 		TriggerClientEvent('chat:addMessage', source, { args = { '^1SYSTEM', 'Insufficient Permissions.' } }) end)
 
-
-
-
-	
+RDX.RegisterCommand('getid', 'admin', function(source, args)
+    	if args[1] ~= nil then
+			if PlayerPedId(tonumber(args[1])) ~= nil then				
+				TriggerClientEvent('chat:addMessage', -1, { args = { ''..PlayerPedId(tonumber(args[1]))..' has been kicked by an admin' } })
+			end	
+		end
+		
+	end, function(source, args)
+		TriggerClientEvent('chat:addMessage', source, { args = { '^1SYSTEM', 'Insufficient Permissions.' } }) end)

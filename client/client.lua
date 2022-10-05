@@ -91,7 +91,7 @@ end)
 
 -- Revive
 function DSC:ReviveDeadPlayer(player)
-  if IsPlayerDead(player) then
+  if IsPlayerDead(playerPed) then
       DoScreenFadeOut(1000)             
       Citizen.Wait(2000)
       NetworkResurrectLocalPlayer(StoreCoords, 100.00, true, true, false )        
