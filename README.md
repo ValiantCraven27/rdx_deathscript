@@ -26,3 +26,4 @@ Original Death Script by Vision for RDX-Framework
 - /deathkick # -- kills then kicks player
 
 ## TODO: Update language support and commands
+# TODO : After 3 warnings then saves license to DB for Admin decision
