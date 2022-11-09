@@ -9,8 +9,7 @@ RDX.RegisterCommand('revive', 'admin', function(source, args)
 		end	
 	end
 end, function(source, args)
-	TriggerClientEvent('chat:addMessage', source, { args = { '^1SYSTEM', 'Insufficient Permissions.' } })
-end)
+	TriggerClientEvent('chat:addMessage', source, { args = { '^1SYSTEM', 'Insufficient Permissions.' } }) end)
 
 RDX.RegisterCommand('death', 'admin', function(source, args)
 	if args[1] ~= nil then
